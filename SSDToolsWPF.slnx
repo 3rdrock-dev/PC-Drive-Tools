@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="SSDToolsWPF.Core/SSDToolsWPF.Core.csproj" />
+  <Project Path="SSDToolsWPF.Tests/SSDToolsWPF.Tests.csproj" />
+  <Project Path="SSDToolsWPF.UI/SSDToolsWPF.UI.csproj" />
+</Solution>

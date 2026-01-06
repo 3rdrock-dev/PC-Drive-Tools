@@ -1,0 +1,159 @@
+<Application x:Class="SSDToolsWPF.UI.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             StartupUri="MainWindow.xaml">
+  <Application.Resources>
+    <!-- VS2026 Dark Theme Color Palette -->
+    <Color x:Key="VS_Background">#1E1E1E</Color>
+    <Color x:Key="VS_BackgroundDark">#252526</Color>
+    <Color x:Key="VS_BackgroundDarker">#2D2D30</Color>
+    <Color x:Key="VS_BackgroundLighter">#3E3E42</Color>
+    <Color x:Key="VS_Border">#3F3F46</Color>
+    <Color x:Key="VS_Accent">#007ACC</Color>
+    <Color x:Key="VS_AccentHover">#1C97EA</Color>
+    <Color x:Key="VS_AccentPressed">#005A9E</Color>
+    <Color x:Key="VS_Success">#4EC9B0</Color>
+    <Color x:Key="VS_Text">#FFFFFF</Color>
+    <Color x:Key="VS_TextSecondary">#CCCCCC</Color>
+    <Color x:Key="VS_TextDisabled">#656565</Color>
+    
+    <SolidColorBrush x:Key="VS_BackgroundBrush" Color="{StaticResource VS_Background}"/>
+    <SolidColorBrush x:Key="VS_BackgroundDarkBrush" Color="{StaticResource VS_BackgroundDark}"/>
+    <SolidColorBrush x:Key="VS_BackgroundDarkerBrush" Color="{StaticResource VS_BackgroundDarker}"/>
+    <SolidColorBrush x:Key="VS_BackgroundLighterBrush" Color="{StaticResource VS_BackgroundLighter}"/>
+    <SolidColorBrush x:Key="VS_BorderBrush" Color="{StaticResource VS_Border}"/>
+    <SolidColorBrush x:Key="VS_AccentBrush" Color="{StaticResource VS_Accent}"/>
+    <SolidColorBrush x:Key="VS_AccentHoverBrush" Color="{StaticResource VS_AccentHover}"/>
+    <SolidColorBrush x:Key="VS_AccentPressedBrush" Color="{StaticResource VS_AccentPressed}"/>
+    <SolidColorBrush x:Key="VS_SuccessBrush" Color="{StaticResource VS_Success}"/>
+    <SolidColorBrush x:Key="VS_TextBrush" Color="{StaticResource VS_Text}"/>
+    <SolidColorBrush x:Key="VS_TextSecondaryBrush" Color="{StaticResource VS_TextSecondary}"/>
+    <SolidColorBrush x:Key="VS_TextDisabledBrush" Color="{StaticResource VS_TextDisabled}"/>
+
+    <!-- Modern Button Style -->
+    <Style x:Key="ModernButton" TargetType="Button">
+      <Setter Property="Background" Value="{StaticResource VS_BackgroundDarkerBrush}"/>
+      <Setter Property="Foreground" Value="{StaticResource VS_TextBrush}"/>
+      <Setter Property="BorderBrush" Value="{StaticResource VS_BorderBrush}"/>
+      <Setter Property="BorderThickness" Value="1"/>
+      <Setter Property="Padding" Value="12,6"/>
+      <Setter Property="FontSize" Value="13"/>
+      <Setter Property="Cursor" Value="Hand"/>
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="Button">
+            <Border x:Name="border"
+                    Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="3">
+              <ContentPresenter HorizontalAlignment="Center"
+                              VerticalAlignment="Center"
+                              Margin="{TemplateBinding Padding}"/>
+            </Border>
+            <ControlTemplate.Triggers>
+              <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="border" Property="Background" Value="{StaticResource VS_BackgroundLighterBrush}"/>
+                <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource VS_AccentBrush}"/>
+              </Trigger>
+              <Trigger Property="IsPressed" Value="True">
+                <Setter TargetName="border" Property="Background" Value="{StaticResource VS_BackgroundDarkBrush}"/>
+              </Trigger>
+              <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Foreground" Value="{StaticResource VS_TextDisabledBrush}"/>
+                <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource VS_BackgroundLighterBrush}"/>
+              </Trigger>
+            </ControlTemplate.Triggers>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+
+    <!-- Accent Button Style (for primary actions) -->
+    <Style x:Key="AccentButton" TargetType="Button" BasedOn="{StaticResource ModernButton}">
+      <Setter Property="Background" Value="{StaticResource VS_AccentBrush}"/>
+      <Setter Property="BorderBrush" Value="{StaticResource VS_AccentBrush}"/>
+      <Setter Property="FontWeight" Value="SemiBold"/>
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="Button">
+            <Border x:Name="border"
+                    Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="3">
+              <ContentPresenter HorizontalAlignment="Center"
+                              VerticalAlignment="Center"
+                              Margin="{TemplateBinding Padding}"/>
+            </Border>
+            <ControlTemplate.Triggers>
+              <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="border" Property="Background" Value="{StaticResource VS_AccentHoverBrush}"/>
+              </Trigger>
+              <Trigger Property="IsPressed" Value="True">
+                <Setter TargetName="border" Property="Background" Value="{StaticResource VS_AccentPressedBrush}"/>
+              </Trigger>
+              <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Foreground" Value="{StaticResource VS_TextDisabledBrush}"/>
+                <Setter TargetName="border" Property="Background" Value="{StaticResource VS_BackgroundLighterBrush}"/>
+              </Trigger>
+            </ControlTemplate.Triggers>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+
+    <!-- Modern ListBox Style -->
+    <Style x:Key="ModernListBox" TargetType="ListBox">
+      <Setter Property="Background" Value="{StaticResource VS_BackgroundDarkBrush}"/>
+      <Setter Property="Foreground" Value="{StaticResource VS_TextBrush}"/>
+      <Setter Property="BorderBrush" Value="{StaticResource VS_BorderBrush}"/>
+      <Setter Property="BorderThickness" Value="1"/>
+      <Setter Property="Padding" Value="2"/>
+    </Style>
+
+    <!-- Modern ListBoxItem Style -->
+    <Style TargetType="ListBoxItem">
+      <Setter Property="Background" Value="Transparent"/>
+      <Setter Property="Foreground" Value="{StaticResource VS_TextBrush}"/>
+      <Setter Property="Padding" Value="8,4"/>
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="ListBoxItem">
+            <Border x:Name="border"
+                    Background="{TemplateBinding Background}"
+                    Padding="{TemplateBinding Padding}"
+                    Margin="1">
+              <ContentPresenter/>
+            </Border>
+            <ControlTemplate.Triggers>
+              <Trigger Property="IsSelected" Value="True">
+                <Setter TargetName="border" Property="Background" Value="{StaticResource VS_AccentBrush}"/>
+              </Trigger>
+              <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="border" Property="Background" Value="{StaticResource VS_BackgroundLighterBrush}"/>
+              </Trigger>
+            </ControlTemplate.Triggers>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+
+    <!-- Modern TextBox Style -->
+    <Style x:Key="ModernTextBox" TargetType="TextBox">
+      <Setter Property="Background" Value="{StaticResource VS_BackgroundDarkBrush}"/>
+      <Setter Property="Foreground" Value="{StaticResource VS_TextSecondaryBrush}"/>
+      <Setter Property="BorderBrush" Value="{StaticResource VS_BorderBrush}"/>
+      <Setter Property="BorderThickness" Value="1"/>
+      <Setter Property="Padding" Value="4"/>
+      <Setter Property="CaretBrush" Value="{StaticResource VS_TextBrush}"/>
+    </Style>
+
+    <!-- Modern ScrollViewer Style -->
+    <Style TargetType="ScrollBar">
+      <Setter Property="Background" Value="{StaticResource VS_BackgroundDarkBrush}"/>
+      <Setter Property="Foreground" Value="{StaticResource VS_BackgroundLighterBrush}"/>
+    </Style>
+
+  </Application.Resources>
+</Application>

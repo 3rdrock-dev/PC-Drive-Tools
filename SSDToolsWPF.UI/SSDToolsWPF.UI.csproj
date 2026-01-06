@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows7.0</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SSDToolsWPF.Core\SSDToolsWPF.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resource\3rdRockLogo256.png" />
+    <Resource Include="Resource\ssd_drive.png" />
+    <Resource Include="Resource\favicon.ico" />
+    <Resource Include="Resource\drive-image.png" />
+  </ItemGroup>
+</Project>
