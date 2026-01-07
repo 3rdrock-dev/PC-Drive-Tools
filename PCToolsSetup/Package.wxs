@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs"
+     xmlns:ui="http://wixtoolset.org/schemas/v4/wxs/ui">
+  <Package 
+    Name="SSD One-Stop Tool" 
+    Manufacturer="3rdRock" 
+    Version="1.0.0.0"
+    UpgradeCode="A1B2C3D4-E5F6-4A7B-8C9D-0E1F2A3B4C5D"
+    Language="1033">
+    
+    <SummaryInformation 
+        Description="SSD One-Stop Tool - SSD Maintenance and Optimization Utility"
+        Comments="Developed for 3rdRock by Jim Barber"
+        Keywords="SSD, TRIM, Optimization, Drive Maintenance"
+        Manufacturer="3rdRock"/>
+    
+    <MajorUpgrade 
+        DowngradeErrorMessage="A newer version is already installed." 
+        Schedule="afterInstallInitialize"
+        AllowSameVersionUpgrades="yes" />
+    
+    <Media Id="1" Cabinet="app.cab" EmbedCab="yes" CompressionLevel="high" />
+
+    <!-- Product Icon -->
+    <Icon Id="ProductIcon" SourceFile="..\SSDToolsWPF.UI\Resource\favicon.ico" />
+    <Property Id="ARPPRODUCTICON" Value="ProductIcon" />
+    <Property Id="ARPURLINFOABOUT" Value="https://github.com/3rdrock-dev/PC-Drive-Tools" />
+    <Property Id="ARPNOREPAIR" Value="yes" Secure="yes" />
+    <Property Id="ARPNOMODIFY" Value="yes" Secure="yes" />
+    
+    <!-- Branding Images -->
+    <WixVariable Id="WixUILicenseRtf" Value="License.rtf" />
+    <WixVariable Id="WixUIBannerBmp" Value="Banner.bmp" />
+    <WixVariable Id="WixUIDialogBmp" Value="Dialog.bmp" />
+
+    <!-- Launch condition - require Windows 10 or later -->
+    <!-- Windows 10 = VersionNT 603, Windows 11 also reports as 603 -->
+    <Launch 
+        Condition="VersionNT &gt;= 603" 
+        Message="This application requires Windows 10 or later." />
+
+    <!-- Features with configurable options -->
+    <Feature Id="MainApplication" 
+             Title="SSD One-Stop Tool" 
+             Level="1" 
+             ConfigurableDirectory="INSTALLFOLDER"
+             Description="The main application and required files."
+             Display="expand"
+             AllowAdvertise="no">
+      <ComponentGroupRef Id="ApplicationFiles" />
+      <ComponentGroupRef Id="ResourceFiles" />
+      
+      <Feature Id="StartMenuShortcuts" 
+               Title="Start Menu Shortcuts" 
+               Level="1"
+               Description="Add shortcuts to the Start Menu for easy access."
+               AllowAdvertise="no">
+        <ComponentGroupRef Id="StartMenuShortcutsGroup" />
+      </Feature>
+
+      <Feature Id="DesktopShortcut" 
+               Title="Desktop Shortcut" 
+               Level="1"
+               Description="Add a shortcut to your Desktop for quick access."
+               AllowAdvertise="no">
+        <ComponentGroupRef Id="DesktopShortcutGroup" />
+      </Feature>
+    </Feature>
+
+    <!-- Directory Structure -->
+    <StandardDirectory Id="ProgramFiles6432Folder">
+      <Directory Id="CompanyFolder" Name="3rdRock">
+        <Directory Id="INSTALLFOLDER" Name="SSD One-Stop Tool">
+          <Directory Id="ResourceFolder" Name="Resource" />
+        </Directory>
+      </Directory>
+    </StandardDirectory>
+
+    <StandardDirectory Id="ProgramMenuFolder">
+      <Directory Id="ApplicationProgramsFolder" Name="3rdRock" />
+    </StandardDirectory>
+
+    <StandardDirectory Id="DesktopFolder" />
+
+    <!-- UI Configuration - Use Mondo UI for full-featured installation -->
+    <ui:WixUI Id="WixUI_Mondo" />
+    
+    <!-- Suppress ICE warnings for shortcuts without components in same directory -->
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
+  </Package>
+</Wix>

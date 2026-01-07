@@ -1,0 +1,6 @@
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+  <Fragment>
+    <!-- This file is now empty as directories are defined in Package.wxs -->
+    <!-- Keeping the file for potential future use -->
+  </Fragment>
+</Wix>
