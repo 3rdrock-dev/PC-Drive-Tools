@@ -1,4 +1,13 @@
 <Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="ARM64" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="PCToolsSetup/PCToolsSetup.wixproj" Type="b7dd6f7e-def8-4e67-b5b7-07ef123db6f0" Id="10e86f14-0cbb-4575-a96b-cc9913ed7672">
+    <Platform Solution="*|Any CPU" Project="x64" />
+  </Project>
   <Project Path="SSDToolsWPF.Core/SSDToolsWPF.Core.csproj" />
   <Project Path="SSDToolsWPF.Tests/SSDToolsWPF.Tests.csproj" />
   <Project Path="SSDToolsWPF.UI/SSDToolsWPF.UI.csproj" />

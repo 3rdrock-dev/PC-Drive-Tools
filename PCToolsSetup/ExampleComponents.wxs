@@ -1,0 +1,101 @@
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+  <Fragment>
+    <!-- Main Application Files -->
+    <ComponentGroup Id="ApplicationFiles" Directory="INSTALLFOLDER">
+      <!-- Main Executable and DLL -->
+      <Component Id="MainExecutable" Guid="11111111-1111-1111-1111-111111111111">
+        <File Id="SSDToolsWPF.UI.exe" 
+              Source="..\SSDToolsWPF.UI\bin\$(var.Configuration)\net10.0-windows7.0\SSDToolsWPF.UI.exe" 
+              KeyPath="yes" />
+        <File Id="SSDToolsWPF.UI.dll" 
+              Source="..\SSDToolsWPF.UI\bin\$(var.Configuration)\net10.0-windows7.0\SSDToolsWPF.UI.dll" />
+      </Component>
+
+      <!-- Application DLLs -->
+      <Component Id="CoreLibrary" Guid="22222222-2222-2222-2222-222222222222">
+        <File Id="SSDToolsWPF.Core.dll" 
+              Source="..\SSDToolsWPF.UI\bin\$(var.Configuration)\net10.0-windows7.0\SSDToolsWPF.Core.dll" />
+      </Component>
+
+      <!-- Configuration Files -->
+      <Component Id="ConfigFiles" Guid="33333333-3333-3333-3333-333333333333">
+        <File Id="SSDToolsWPF.UI.deps.json" 
+              Source="..\SSDToolsWPF.UI\bin\$(var.Configuration)\net10.0-windows7.0\SSDToolsWPF.UI.deps.json" />
+        <File Id="SSDToolsWPF.UI.runtimeconfig.json" 
+              Source="..\SSDToolsWPF.UI\bin\$(var.Configuration)\net10.0-windows7.0\SSDToolsWPF.UI.runtimeconfig.json" />
+      </Component>
+
+      <!-- Third-party Dependencies -->
+      <Component Id="TaskSchedulerLibrary" Guid="44444444-4444-4444-4444-444444444444">
+        <File Id="Microsoft.Win32.TaskScheduler.dll" 
+              Source="..\SSDToolsWPF.UI\bin\$(var.Configuration)\net10.0-windows7.0\Microsoft.Win32.TaskScheduler.dll" />
+      </Component>
+
+      <!-- System Service Controller Library -->
+      <Component Id="ServiceControllerLibrary" Guid="BBBBBBBB-BBBB-BBBB-BBBB-BBBBBBBBBBBB">
+        <File Id="System.ServiceProcess.ServiceController.dll" 
+              Source="..\SSDToolsWPF.UI\bin\$(var.Configuration)\net10.0-windows7.0\System.ServiceProcess.ServiceController.dll" />
+      </Component>
+    </ComponentGroup>
+
+    <!-- Resource Files -->
+    <ComponentGroup Id="ResourceFiles" Directory="ResourceFolder">
+      <Component Id="AppIcon" Guid="55555555-5555-5555-5555-555555555555">
+        <File Id="favicon.ico" 
+              Source="..\SSDToolsWPF.UI\Resource\favicon.ico" />
+      </Component>
+
+      <Component Id="DriveImage" Guid="66666666-6666-6666-6666-666666666666">
+        <File Id="ssd_drive.png" 
+              Source="..\SSDToolsWPF.UI\Resource\ssd_drive.png" />
+      </Component>
+
+      <Component Id="CompanyLogo" Guid="77777777-7777-7777-7777-777777777777">
+        <File Id="ThirdRockLogo256.png" 
+              Source="..\SSDToolsWPF.UI\Resource\3rdRockLogo256.png" />
+      </Component>
+
+      <Component Id="DriveImageAlt" Guid="88888888-8888-8888-8888-888888888888">
+        <File Id="drive_image.png" 
+              Source="..\SSDToolsWPF.UI\Resource\drive-image.png" />
+      </Component>
+    </ComponentGroup>
+
+    <!-- Start Menu Shortcuts -->
+    <ComponentGroup Id="StartMenuShortcutsGroup" Directory="ApplicationProgramsFolder">
+      <Component Id="StartMenuShortcut" Guid="99999999-9999-9999-9999-999999999999">
+        <Shortcut Id="StartMenuShortcut"
+                  Name="SSD One-Stop Tool"
+                  Description="SSD Maintenance and Optimization Utility"
+                  Target="[INSTALLFOLDER]SSDToolsWPF.UI.exe"
+                  WorkingDirectory="INSTALLFOLDER"
+                  Icon="ProductIcon" />
+        <RemoveFolder Id="RemoveProgramMenuFolder" Directory="ApplicationProgramsFolder" On="uninstall" />
+        <RegistryValue Root="HKCU" 
+                       Key="Software\3rdRock\SSDOneStopTool" 
+                       Name="installed" 
+                       Type="integer" 
+                       Value="1" 
+                       KeyPath="yes" />
+      </Component>
+    </ComponentGroup>
+
+    <!-- Desktop Shortcut -->
+    <ComponentGroup Id="DesktopShortcutGroup" Directory="DesktopFolder">
+      <Component Id="DesktopShortcut" Guid="AAAAAAAA-AAAA-AAAA-AAAA-AAAAAAAAAAAA">
+        <Shortcut Id="DesktopShortcut"
+                  Name="SSD One-Stop Tool"
+                  Description="SSD Maintenance and Optimization Utility"
+                  Target="[INSTALLFOLDER]SSDToolsWPF.UI.exe"
+                  WorkingDirectory="INSTALLFOLDER"
+                  Icon="ProductIcon" />
+        <RegistryValue Root="HKCU" 
+                       Key="Software\3rdRock\SSDOneStopTool" 
+                       Name="desktopShortcut" 
+                       Type="integer" 
+                       Value="1" 
+                       KeyPath="yes" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+</Wix>

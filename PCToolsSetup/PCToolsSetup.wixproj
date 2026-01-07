@@ -1,0 +1,49 @@
+﻿<Project Sdk="WixToolset.Sdk/6.0.2">
+  <PropertyGroup>
+    <OutputName>SSDOneStopTool-Setup</OutputName>
+    <OutputType>Package</OutputType>
+    <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DefineConstants>Debug</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DefineConstants>Release</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="WixToolset.UI.wixext" Version="6.0.2" />
+    <PackageReference Include="WixToolset.Util.wixext" Version="6.0.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SSDToolsWPF.UI\SSDToolsWPF.UI.csproj">
+      <Name>SSDToolsWPF.UI</Name>
+      <Private>True</Private>
+      <DoNotHarvest>True</DoNotHarvest>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Package.wxs" />
+    <Compile Include="ExampleComponents.wxs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Package.en-us.wxl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="License.rtf" />
+    <Content Include="Banner.bmp" />
+    <Content Include="Dialog.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Create-BrandingImages-DarkTheme.ps1" />
+    <None Include="CUSTOM-BRANDING-SUMMARY.md" />
+    <None Include="INSTALLATION-GUIDE.md" />
+    <None Include="README.md" />
+    <None Include="Folders.wxs" />
+    <None Include="THEME-OPTIONS.md" />
+    <None Include="WIZARD-IMPLEMENTATION.md" />
+    <None Include="CREATE-BRANDING-IMAGES.md" />
+    <None Include="Create-BrandingImages.ps1" />
+  </ItemGroup>
+</Project>
